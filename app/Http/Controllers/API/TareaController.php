@@ -52,4 +52,12 @@ class TareaController extends Controller
         return (new TareaResource($tarea))
             ->additional(['msg' => 'Tarea eliminado con exito']);
     }
+
+    public function getTasks()
+    {
+        $tasks = DB::table('tareas')
+            ->select('id', 'nombre', 'descripcion', 'estado')
+            ->get();
+        return $tasks;
+    }
 }
