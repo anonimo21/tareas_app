@@ -27,4 +27,24 @@ class TareaControllerTest extends TestCase
         //Comprobación de la respuesta
         $response->assertStatus(200);
    }
+
+    public function test_crear_tareas(): void
+    {
+        //Preparación del escenario
+        $user = User::factory()->create();
+
+        //Autenticación del usuario
+        $this->actingAs($user);
+
+        //Realización de la acción
+        $response = $this->postJson('/api/tareas', [
+            'nombre' => 'Tarea 1',
+            'descripcion' => 'Descripción de la tarea 1',
+            'estado' => '1'
+        ]);
+
+        // Comprobación de la respuesta
+        $response->assertCreated(); //201
+    }
+    
 }
